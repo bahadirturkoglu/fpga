@@ -2,17 +2,17 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_1.PNG[R]
 
 = VİVADO 2016.4 VERSİYONU İNDİRMEK İÇİN İZLENİLMESİ GEREKEN ADIMLAR +
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_2.PNG[R] +
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_2.PNG[R] 
 
 
 == 1.	XILINX HESABI OLUŞTURMA +
 Vivado programını bilgisayarınıza kurabilmeniz için öncelikle https://www.xilinx.com sitesinde hesap oluşturmanız gerekmektedir.  +
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_3.PNG[R] +
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_3.PNG[R] 
 
 Daha sonra istenilen bilgileri doldurup hesap açma işlemlerini tamamlayınız. +
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_4.PNG[R] +
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_4.PNG[R] 
 
 == 2. VİVADO 2016.4 KURULUM AŞAMALARI
 Hesap oluşturma işlemleri tamamlandıktan sonra https://www.xilinx.com/support/download.html linkine tıklayarak kurulum dosyalarının bulunduğu sayfaya giriniz. *“Version” olarak 2016.4 ‘* ü seçiniz. +
