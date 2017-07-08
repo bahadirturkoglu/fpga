@@ -64,7 +64,7 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_16.PNG[R]
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_17.PNG[R]
 
-Daha sonra karşınıza gelecek olan sayfaları da geçerek yeni lisans oluşturma aşamalarını bitirmiş oluyorsunuz. +,
+Daha sonra karşınıza gelecek olan sayfaları da geçerek yeni lisans oluşturma aşamalarını bitirmiş oluyorsunuz. +
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_18.PNG[R]
 
