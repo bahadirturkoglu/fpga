@@ -92,6 +92,8 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_24.PNG[R]
 
 Masaüstünde oluşmuş olan *"Vivado 2016.4"* simgesine tıklayarak programı başlatabilirsiniz. +
 
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_25.PNG[R]
+
 
 
 
