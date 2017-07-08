@@ -36,3 +36,61 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_9.PNG[R]
 *“Vivado HL WebPACK”*  eğitim seçeneğini seçip bir sonraki sayfaya geçebilirsiniz. +
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_10.PNG[R]
+
+Karşınıza çıkacak olan sayfada bir değişiklik yapılmaması tavsiye edilmektedir. Bir sonraki sayfaya doğrudan geçebilirsiniz. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_11.PNG[R]
+
+Bu sayfada *“apply shortcut & file association selections”* bölümünü, vivado programını kullanım şeklinize göre seçebilirsiniz. Bu dökümanda aşağıdaki gibi bir seçim tavsiye edilmiştir. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_12.PNG[R]
+
+*“Installation Summary”* sayfasında *“Install”* butonuna tıklayınız. Gerekli yüklemeler gerçekleştikten sonra vivado programının kurulum aşamasını bitirmiş olursunuz. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_13.PNG[R]
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_14.PNG[R]
+
+== 3.	Lisans Yönetimi ve Lisans Aktifleştirme Aşamaları +
+Kurulum aşamaları bittikten *“License Manager”* sayfasında *“Obtain License”* kısmına tıklayınız. Ekrana gelecek olan sayfada, aşağıda belirtilen işaretlemeleri yaparak *“Connect Now”* seçeneği ile Xilinx’in sitesine bağlanıyoruz. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_15.PNG[R]
+
+*“Create New Licenses”* bölümünde tavsiye edilen işaretlemeleri yapınız. Buradaki seçimlerde lisansların kullanım sürelerine dikkat ediniz. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_16.PNG[R]
+
+*“Product Selection”* bölümünde *“ISE WebPACK License”*  seçiyoruz. Eğer bu lisansı seçemezseniz, aşağıda belirtilen diğer lisansı da seçebilirsiniz. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_17.PNG[R]
+
+Daha sonra karşınıza gelecek olan sayfaları da geçerek yeni lisans oluşturma aşamalarını bitirmiş oluyorsunuz. +,
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_18.PNG[R]
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_19.PNG[R]
+
+Son olarak *“License Manager”* sayfasındaki sol panelde *“View License Status”* bölümüne girerek lisans durumunu kontrol ediniz. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_20.PNG[R]
+
+Eğer lisansınız kabul edilmemiş ise email adresinizde Xilinx tarafından gönderilmiş bir maile sahip olacaksınız. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_21.PNG[R]
+
+*(Load License)* kısmında, size gönderilmiş dosyanın uzantısına göre seçiminizi yapınız. Bize gönderilen dosya uzantısı .lic olduğu için *“Copy License”* butonunu seçtik +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_22.PNG[R]
+
+Karşınıza çıkan pencerede size gönderilen .lic veya .xml uzantılı dosyayı bulup *“open”* butonuna tıklayınız +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_23.PNG[R]
+
+Böylece lisans aktifleştirme aşamalarını tamamlamış olursunuz. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_24.PNG[R]
+
+
+
+
+
