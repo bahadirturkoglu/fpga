@@ -16,3 +16,23 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_4.PNG[R]
 
 == 2. VİVADO 2016.4 KURULUM AŞAMALARI
 Hesap oluşturma işlemleri tamamlandıktan sonra https://www.xilinx.com/support/download.html linkine tıklayarak kurulum dosyalarının bulunduğu sayfaya giriniz. *“Version” olarak 2016.4 ‘* ü seçiniz. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_5.PNG[R] 
+
+Daha sonra aşağıda belirtilen kurulum dosyasını bilgisayarınıza indiriniz. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_6.PNG[R] 
+
+İndirilen dosyadaki *setup* uygulamasına tıklayarak kurulumu başlatınız. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_7.PNG[R]
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_8.PNG[R]
+
+Karşınıza gelecek olan lisans sözleşmesi kabulüyle ilgili sayfada aşağıdaki işaretlemeleri yaparak bir sonraki sayfaya geçebilirsiniz. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_9.PNG[R]
+
+*“Vivado HL WebPACK”*  eğitim seçeneğini seçip bir sonraki sayfaya geçebilirsiniz. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_10.PNG[R]
