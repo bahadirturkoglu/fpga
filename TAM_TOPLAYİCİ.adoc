@@ -1,3 +1,8 @@
+image::https://github.com/bahadirturkoglu/fpga/raw/master/buy_xilinx_fpga-2.jpg.[R] 
+
+
+
+
 = Tam Toplayıcı Devre +
 
 Bir bitlik üç adet sayının toplamını gerçekleştiren ve sonucu S ve C olarak isimlendirilen iki çıkış hattında
