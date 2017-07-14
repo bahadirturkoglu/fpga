@@ -1,0 +1,5 @@
+= Tam Toplayıcı Devre +
+Bir bitlik üç adet sayının toplamını gerçekleştiren ve sonucu S ve C olarak isimlendirilen iki +
+çıkış hattında gösteren düzenek, "‘Tam Toplayıcı’" olarak isimlendirilir. Girişlerden ikisi +
+toplanacak bitleri gösterirken, üçüncü giriş bir önceki düşük değerlikli basamaktan gelen +
+eldeyi (carry) ifade etmek için kullanılır. +
