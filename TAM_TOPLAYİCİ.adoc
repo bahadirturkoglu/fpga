@@ -1,6 +1,9 @@
 image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_1.PNG[R]
 
+*VERİLOG FULL ADDER TASARIMI* +
+*(ZYBO ZYNQ-7000 KARTI KULLANILMIŞTIR.)* +
 
+image::https://github.com/bahadirturkoglu/fpga/raw/master/buy_xilinx_fpga-2.PNG[R]
 
 
 = Tam Toplayıcı Devre +
@@ -14,5 +17,11 @@ bulunan *‘1’* değerleri Boolean kurallarına göre toplanıp, sonuçlar S v
 bulunduğundan, her bir çıkış için uygun olan değerleri içeren sütunlar oluşturulur ve sütunlardaki değerler Karnaugh +
 haritalarına taşınır. Karnaugh haritalarından lojik eşitlikler elde edilir ve elde edilen +
 eşitliklerin lojik şemaları çizilir. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/K1.PNG[R]
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/K.PNG[R]
+
+
 
 
