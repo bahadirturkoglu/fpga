@@ -1,7 +1,7 @@
 image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_1.PNG[R]
 
 = VERİLOG FULL ADDER TASARIMI +
-= (ZYBO ZYNQ-7000 KARTI KULLANILMIŞTIR.)* +
+== (ZYBO ZYNQ-7000 KARTI KULLANILMIŞTIR.) +
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/buy_xilinx_fpga-2.PNG[R]
 
@@ -33,7 +33,7 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/1-1-S.PNG[R]
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/2-B.PNG[R]
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/2-2-B.PNG[R]
+image::https://github.com/bahadirturkoglu/fpga/raw/master/2-2-S.PNG[R]
 
 == TAM TOPLAYICI DATAFLOW KODU VE BLOK ŞEMASI +
 
