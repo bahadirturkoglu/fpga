@@ -1,4 +1,4 @@
-image::https://github.com/bahadirturkoglu/fpga/raw/master/buy_xilinx_fpga-2.jpg.[R] 
+image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_1.PNG.[R] 
 
 
 
