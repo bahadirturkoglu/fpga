@@ -31,15 +31,15 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/1-1-S.PNG[R]
 
 == TAM TOPLAYICI BEHAVİORAL KODU VE BLOK ŞEMASI +
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/1-B.PNG[R]
+image::https://github.com/bahadirturkoglu/fpga/raw/master/2-B.PNG[R]
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/1-1-B.PNG[R]
+image::https://github.com/bahadirturkoglu/fpga/raw/master/2-2-B.PNG[R]
 
 == TAM TOPLAYICI DATAFLOW KODU VE BLOK ŞEMASI +
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/1-D.PNG[R]
+image::https://github.com/bahadirturkoglu/fpga/raw/master/3-D.PNG[R]
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/1-1-D.PNG[R]
+image::https://github.com/bahadirturkoglu/fpga/raw/master/3-3-D.PNG[R]
 
 == SİMÜLASYON ÇIKTISI +
 
