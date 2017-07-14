@@ -1,6 +1,13 @@
 = Tam Toplayıcı Devre +
 
-Bir bitlik üç adet sayının toplamını gerçekleştiren ve sonucu S ve C olarak isimlendirilen iki +
-çıkış hattında gösteren düzenek, "‘Tam Toplayıcı’" olarak isimlendirilir. Girişlerden ikisi +
-toplanacak bitleri gösterirken, üçüncü giriş bir önceki düşük değerlikli basamaktan gelen +
-eldeyi (carry) ifade etmek için kullanılır. +
+Bir bitlik üç adet sayının toplamını gerçekleştiren ve sonucu S ve C olarak isimlendirilen iki çıkış hattında
+gösteren düzenek, *‘Tam Toplayıcı’* olarak isimlendirilir. Girişlerden ikisi toplanacak bitleri gösterirken,
+üçüncü giriş bir önceki düşük değerlikli basamaktan gelen eldeyi (carry) ifade etmek için kullanılır. +
+
+Toplayıcı tasarımında, doğruluk tablosunda giriş değişkenlerinin alabileceği değerler sıralandıktan sonra, kombinasyonlarda +
+bulunan *‘1’* değerleri Boolean kurallarına göre toplanıp, sonuçlar S ve Co kolonlarına yazılır. Devrede iki çıkış +
+bulunduğundan, her bir çıkış için uygun olan değerleri içeren sütunlar oluşturulur ve sütunlardaki değerler Karnaugh +
+haritalarına taşınır. Karnaugh haritalarından lojik eşitlikler elde edilir ve elde edilen +
+eşitliklerin lojik şemaları çizilir. +
+
+
