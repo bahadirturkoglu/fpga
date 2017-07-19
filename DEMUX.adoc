@@ -4,3 +4,17 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_1.PNG[R]
 == (ZYBO ZYNQ-7000 KARTI KULLANILMIŞTIR.) +
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/DEMUX.PNG[R]
+
+
+= DEMULTİPLEXER NEDİR +
+
+Tek giriş hattından gelen bilgileri, her bir giriş farklı çıkışta olacak şekilde seçerek çıkışa aktarılmasını sağlayan +
+bileşik devrelere azlayıcı/ veri dağıtıcı devreler (demultiplexer) adı verilir. Kısaca DEMUX şeklinde gösterilir. +
+
+Demultiplexer’ lar çıkış seçme işlemini seçme girişleri (select inputs)  vasıtasıyla gerçekleştirirler. Multiplexer’ ların +
+tersi bir işlem gerçekleştirirler. 2n sayıdaki çıkış hattı için n sayıda seçme girişi bulunur. Örneğin 1×2 bir demultiplexer +
+için 2n= 21= 2 çıkış vardır. Dolayısıyla n= 1 adet seçme ucu olacaktır. +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/DEMUX_1.PNG[R]
+image::https://github.com/bahadirturkoglu/fpga/raw/master/DEMUX_2.PNG[R]
+
