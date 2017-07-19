@@ -2,3 +2,5 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_1.PNG[R]
 
 = DEMULTİPLEXER TASARIMI +
 == (ZYBO ZYNQ-7000 KARTI KULLANILMIŞTIR.) +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/DEMUX.PNG[R]
