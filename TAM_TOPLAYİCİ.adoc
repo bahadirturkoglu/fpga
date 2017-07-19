@@ -24,17 +24,24 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/K2.PNG[R]
 
 == TAM TOPLAYICI DEVRESİ STRUCTURAL KODU VE BLOK ŞEMASI +
 
-[source,c]
+[source,verilog]
 ---------------------------------------------------------------------
 
-module yari_toplayici(A, B, S, C);
-  input A;
-  input B;
-  output S;
-  output C;
-  
-  xor xor1(S, A, B);
-  and and1(C, A, B);
+module fulladder(
+input x,
+input y,
+input cin,
+output A,
+output cout
+);
+
+wire w1,w2,w3;
+	xor(w1,x,y);
+	xor(A,w1,cin);
+	
+	and(w2,w1,cin);
+	and(w3,x,y);
+	or(cout,w2,w3);
 endmodule
 
 ---------------------------------------------------------------------
@@ -44,13 +51,50 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/1-1-S.PNG[R]
 
 == TAM TOPLAYICI BEHAVİORAL KODU VE BLOK ŞEMASI +
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/2-B.PNG[R]
+[source,verilog]
+---------------------------------------------------------------------
+
+module full_adder(a,b,cin,sum,cout);
+
+input a,b,cin;
+output sum,cout;
+
+wire a,b,cin;
+reg sum,cout;
+
+always@(a or b or cin)
+	begin
+		{cout,sum}=a+b+cin;
+	end
+endmodule
+
+---------------------------------------------------------------------
+
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/2-2-S.PNG[R]
 
 == TAM TOPLAYICI DATAFLOW KODU VE BLOK ŞEMASI +
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/3-D.PNG[R]
+[source,verilog]
+---------------------------------------------------------------------
+
+module full_adder(a,b,c,sum,carry);
+
+input a;
+input b;
+input c;
+
+ouput sum;
+output carry;
+
+assign sum=a ^ b ^ c;
+assign carry= (a&b)| (b&c)| (c&a);
+
+endmodule
+
+---------------------------------------------------------------------
+
+
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/3-3-D.PNG[R]
 
