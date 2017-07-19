@@ -1,12 +1,12 @@
 image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_1.PNG[R]
 
-= VERİLOG MULTİPLEXER TASARIMI +
+= VERİLOG MULTIPLEXER TASARIMI +
 == (ZYBO ZYNQ-7000 KARTI KULLANILMIŞTIR.) +
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/MUX_1.PNG[R]
 
 
-= MULTİPLEXER NEDİR +
+= MULTIPLEXER NEDİR +
 
 Multiplexer devresi, bir çok giriş hattındaki bilgilerden birisini seçerek sadece uygun olan birini +
 çıkışa aktaran devredir. Bir giriş hattının seçilmesi, seçme bitleri ile kontrol  edilmektedir. +
@@ -16,7 +16,7 @@ Multiplexer kısaca MUX olarak bilinir. Multiplex'in Türkçe karşılığı ise
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/mux-tablo_1.PNG[R]
 
-== MULTİPLEXER KODU VE BLOK ŞEMASI +
+== MULTIPLEXER KODU VE BLOK ŞEMASI +
 
 [source,verilog]
 ---------------------------------------------------------------------
@@ -47,7 +47,7 @@ endmodule
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/MUX-2.PNG[R]
 
-== MULTİPLEXER TESTBENCH KODU +
+== MULTIPLEXER TESTBENCH KODU +
 
 [source,verilog]
 ---------------------------------------------------------------------
