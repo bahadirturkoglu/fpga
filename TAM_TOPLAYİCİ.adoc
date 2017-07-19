@@ -45,7 +45,7 @@ wire w1,w2,w3;
 endmodule
 
 ---------------------------------------------------------------------
-image::https://github.com/bahadirturkoglu/fpga/raw/master/1-S.PNG[R]
+
 image::https://github.com/bahadirturkoglu/fpga/raw/master/1-1-S.PNG[R]
 
 
