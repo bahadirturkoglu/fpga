@@ -16,3 +16,33 @@ Multiplexer kısaca MUX olarak bilinir. Multiplex'in Türkçe karşılığı ise
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/mux-tablo_1.PNG[R]
 
+== MULTİPLEXER KODU VE BLOK ŞEMASI +
+
+[source,verilog]
+---------------------------------------------------------------------
+
+
+module mux (sel, i1, i2, i3, i4, o1);
+
+input [1:0] sel;
+input  i1, i2, i3, i4;
+output  o1;
+  reg  o1;
+
+always @(sel or i1 or i2 or i3 or i4)
+  begin
+   case (sel)
+
+      2'b00: o1 = i1;
+      2'b01: o1 = i2;
+      2'b10: o1 = i3;
+      2'b11: o1 = i4;
+    endcase
+  end
+endmodule
+
+
+---------------------------------------------------------------------
+
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/MUX-2.PNG[R]
