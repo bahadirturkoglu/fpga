@@ -3,4 +3,4 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_1.PNG[R]
 = VERİLOG MULTİPLEXER TASARIMI +
 == (ZYBO ZYNQ-7000 KARTI KULLANILMIŞTIR.) +
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/images(1).PNG[R]
+image::https://github.com/bahadirturkoglu/fpga/raw/master/images (1).PNG[R]
