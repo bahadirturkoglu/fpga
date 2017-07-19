@@ -13,6 +13,6 @@ Multiplexer devresi, bir çok giriş hattındaki bilgilerden birisini seçerek s
 Multiplexer kısaca MUX olarak bilinir. Multiplex'in Türkçe karşılığı ise *'veri çoklayıcılar'* anlamına gelmektedir. +
 2n giriş hatlı bir MUX devresinde n tane select bit (seçme biti) vardır. MUX’ a veri seçici veya bilgi seçici adı verilmektedir. +
 
+
 image::https://github.com/bahadirturkoglu/fpga/raw/master/mux-tablo_1.PNG[R]
-image::https://github.com/bahadirturkoglu/fpga/raw/master/mux-tablo_2.PNG[R]
-image::https://github.com/bahadirturkoglu/fpga/raw/master/mux-tablo_3.PNG[R]
+
