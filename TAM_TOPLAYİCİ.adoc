@@ -38,7 +38,7 @@ module yari_toplayici(A, B, S, C);
 endmodule
 
 ---------------------------------------------------------------------
-
+image::https://github.com/bahadirturkoglu/fpga/raw/master/1-S.PNG[R]
 image::https://github.com/bahadirturkoglu/fpga/raw/master/1-1-S.PNG[R]
 
 
