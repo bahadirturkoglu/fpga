@@ -24,7 +24,20 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/K2.PNG[R]
 
 == TAM TOPLAYICI DEVRESİ STRUCTURAL KODU VE BLOK ŞEMASI +
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/1-S.PNG[R]
+[source,c]
+---------------------------------------------------------------------
+
+module yari_toplayici(A, B, S, C);
+  input A;
+  input B;
+  output S;
+  output C;
+  
+  xor xor1(S, A, B);
+  and and1(C, A, B);
+endmodule
+
+---------------------------------------------------------------------
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/1-1-S.PNG[R]
 
