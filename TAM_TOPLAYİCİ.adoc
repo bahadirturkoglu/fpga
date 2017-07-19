@@ -84,7 +84,7 @@ input a;
 input b;
 input c;
 
-ouput sum;
+output sum;
 output carry;
 
 assign sum=a ^ b ^ c;
