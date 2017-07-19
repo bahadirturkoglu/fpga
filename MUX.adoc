@@ -46,3 +46,43 @@ endmodule
 
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/MUX-2.PNG[R]
+
+== MULTİPLEXER TESTBENCH KODU +
+
+[source,verilog]
+---------------------------------------------------------------------
+
+
+module test();
+
+reg [1:0] sel;
+reg  i1, i2, i3, i4;
+wire  o1;
+
+mux uut(.sel(sel), .i1(i1), .i2(i2), .i3(i3), .i4(i4), .o1(o1)  );
+initial 
+    begin
+        i1=1;
+        i2=0;
+        i3=1;
+        i4=0;
+         #10
+         sel= 2'b00;
+         #10
+         sel= 2'b01;
+         #10
+         sel= 2'b10;
+         #10
+         sel= 2'b11;
+         #10
+         $finish;
+    end            
+endmodule
+
+---------------------------------------------------------------------
+
+== SİMÜLASYON ÇIKTISI +
+
+image::https://github.com/bahadirturkoglu/fpga/raw/master/MUX-4.PNG[R]
+
+
