@@ -6,7 +6,7 @@ image::https://github.com/bahadirturkoglu/fpga/raw/master/kurulum_1.PNG[R]
 image::https://github.com/bahadirturkoglu/fpga/raw/master/DEMUX.PNG[R]
 
 
-= DEMULTİPLEXER NEDİR +
+= DEMULTIPLEXER NEDİR +
 
 Tek giriş hattından gelen bilgileri, her bir giriş farklı çıkışta olacak şekilde seçerek çıkışa aktarılmasını sağlayan +
 bileşik devrelere azlayıcı/ veri dağıtıcı devreler (demultiplexer) adı verilir. Kısaca DEMUX şeklinde gösterilir. +
@@ -18,7 +18,7 @@ için 2n= 21= 2 çıkış vardır. Dolayısıyla n= 1 adet seçme ucu olacaktır
 image::https://github.com/bahadirturkoglu/fpga/raw/master/DEMUX_1.PNG[R]
 image::https://github.com/bahadirturkoglu/fpga/raw/master/DEMUX_2.PNG[R]
 
-== DEMULTİPLEXER BEHAVİORAL KODU VE BLOK ŞEMASI +
+== DEMULTIPLEXER BEHAVIORAL KODU VE BLOK ŞEMASI +
 
 [source,verilog]
 ---------------------------------------------------------------------
@@ -79,7 +79,7 @@ endmodule
 ---------------------------------------------------------------------
 image::https://github.com/bahadirturkoglu/fpga/raw/master/demux-data-sema[R]
 
-== DEMULTİPLEXER TESTBENCH KODU +
+== DEMULTIPLEXER TESTBENCH KODU +
 
 [source,verilog]
 ---------------------------------------------------------------------
@@ -121,7 +121,7 @@ endmodule
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/demux_beh-4[R]
 
-== DEMULTİPLEXER BEHAVİORAL KODU 
+== DEMULTIPLEXER DATAFLOW KODU 
 
 [source,verilog]
 ---------------------------------------------------------------------
