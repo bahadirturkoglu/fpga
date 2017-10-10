@@ -122,6 +122,8 @@ if(clk'event and clk='1') then
 --yenı merkez adında fonk oluşturulcak ve merkez guncellenecek ,güncellenen merkezler ile döngü tekrarlancak
 -- merkezler stabil duruma  gelince program bitmiş olcak
 --Deneme için 1 nokta ve 2 merkez kullanıyoruz daha sonra kod generic ifadesinin kullanımıyla dinamik hale getirilcek
+--cıkarma işlemi olduktan sonra kare alma işlemine geçildiğinde sıradaki sayıların çıkarma işlemine 
+--girmesi için pipeline yapmaya çalısıyoruz.
 
                                   
                
