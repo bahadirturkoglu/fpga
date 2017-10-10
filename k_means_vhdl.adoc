@@ -1,0 +1,126 @@
+
+[source,vhdl]
+------------------------------------------------------------------------------------------------------
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL; 
+use IEEE.STD_LOGIC_SIGNED.ALL; 
+
+entity K_means is
+generic(	length : integer :=8;
+            x: integer:=1
+						);
+
+port  (
+Clk : in std_logic
+);
+end k_means ;
+
+
+architecture Behavioral of k_means is
+
+---------------------------------------------------------------------------------------------
+--                                      BÖLME İŞLEMİ
+--yeni merkezin belirlenmesi için kullanılacak
+
+function  divide  (a : UNSIGNED; b : UNSIGNED) return UNSIGNED is
+    variable a1 : unsigned(a'length-1 downto 0):=a;
+    variable b1 : unsigned(b'length-1 downto 0):=b;
+    variable p1 : unsigned(b'length downto 0):= (others => '0');
+    variable i : integer:=0;
+
+        begin
+            for i in 0 to b'length-1 loop
+                p1(b'length-1 downto 1) := p1(b'length-2 downto 0);
+                p1(0) := a1(a'length-1);
+                a1(a'length-1 downto 1) := a1(a'length-2 downto 0);
+                p1 := p1-b1;
+                    if(p1(b'length-1) ='1') then
+                        a1(0) :='0';
+                        p1 := p1+b1;
+                    else
+                        a1(0) :='1';
+                    end if;
+           end loop;
+        return a1;
+end divide;
+
+----------------------------------------------------------------------------------------------
+signal i,y,t: integer := 0;
+signal z : integer := 0;
+
+type a is array (0 to 1) of std_logic_vector(1 downto 0); 
+type b is array (0 to 1) of a;
+
+type ROM is array (0 to 1) of std_logic_vector(1 downto 0); 
+type ROM_1 is array(0 to 1) of ROM;
+signal data : ROM_1 :=(("01","01"), --IRIS-DATANIN OLCAĞI DİZİ
+                        ("01","10"));
+ 
+signal center_1 :  ROM :=("11","10"); -- MERKEZ_1
+signal center_2 :  ROM :=("10","10"); -- MERKEZ_2
+
+
+type memory_type_1 is array (0 to 1) of std_logic_vector(3 downto 0); 
+signal x1,x2:memory_type_1:=(others =>(others =>'0'));
+
+type kume is array (0 to 3) of integer ; --MERKEZLERİN KUMELERİ İNDİS TUTULCAK
+signal kume_1,kume_2 : kume:=(others =>0);
+
+
+begin
+
+
+u1:process(clk)
+ 
+variable s1,s2: ROM:=(others =>(others =>'0'));
+variable z1,z2: memory_type_1 :=(others =>(others =>'0'));
+
+	
+begin
+  --to check the rising edge of the clock signal
+if(clk'event and clk='1') then 
+        
+            if(i<5)then
+            i<=i+1;
+            end if;
+            
+         -- YAPILAN UZAKLIK İŞLEMİ=((CENTER(Y)-DATA(Y))**2)+((CENTER(Y+1)-DATA(Y))**2 ) 
+            if(i=1)then
+            
+                s1(y):=abs(center_1(y)-data(y)(t));
+                s2(y):=abs(center_2(y)-data(y)(t));
+                s1(y+1):=abs(center_1(y+1)-data(y)(t+1));
+                s2(y+1):=abs(center_2(y+1)-data(y)(t+1));                        
+            end if;
+            
+            if(i=2)then
+                z1(y):=s1(y)*s1(y); 
+                z2(y):=s2(y)*s2(y);
+                z1(y+1):=s1(y+1)*s1(y+1); 
+                z2(y+1):=s2(y+1)*s2(y+1);                                          
+            end if;
+            
+            if(i=3)then           
+                x1(y)<=z1(y)+z1(y+1); 
+                x2(y)<=z2(y)+z2(y+1); 
+            end if;
+            
+            if(i=4)then
+                if(x2(y)<x1(y))then --NOKTANIN 2 MERKEZE UZAKLIGININ KARŞILAŞTIRILMASI               
+                  kume_1(0)<=y;     --ve noktanın indisinin uygun kümede tutulması
+                 else
+                  kume_2(0)<=y;
+                end if;
+              end if;
+                    
+------- 
+                                  
+               
+end if;
+end process;
+
+
+end Behavioral;
+-------------------------------------------------------------------------------------------------------------------
