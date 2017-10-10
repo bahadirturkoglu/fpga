@@ -7,7 +7,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL; 
 use IEEE.STD_LOGIC_SIGNED.ALL; 
 
-entity K_means is
+entity k_means is
 generic(	length : integer :=8;
             x: integer:=1
 						);
@@ -123,4 +123,5 @@ end process;
 
 
 end Behavioral;
+
 -------------------------------------------------------------------------------------------------------------------
