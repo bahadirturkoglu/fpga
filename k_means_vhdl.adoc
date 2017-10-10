@@ -112,13 +112,17 @@ if(clk'event and clk='1') then
             
             if(i=4)then
                 if(x2(y)<x1(y))then --NOKTANIN 2 MERKEZE UZAKLIGININ KARŞILAŞTIRILMASI               
-                  kume_1(0)<=y;     --ve noktanın indisinin uygun kümede tutulması
+                  kume_1(0)<=y;     --ve nokta indislerinin uygun kümede tutulması
                  else
                   kume_2(0)<=y;
                 end if;
               end if;
                     
-------- 
+--tüm elemanların merkez noktalarına uzaklıgı bulunup uygun kumelere atıldıktan sonra
+--yenı merkez adında fonk oluşturulcak ve merkez guncellenecek ,güncellenen merkezler ile döngü tekrarlancak merkezler stabil duruma  
+--gelince program bitmiş olcak
+--Deneme için 1 nokta ve 2 merkez kullanıyoruz daha sonra kod generic ifadesinin kullanımıyla dinamik hale getirilcek
+
                                   
                
 end if;
@@ -128,3 +132,7 @@ end process;
 end Behavioral;
 
 -------------------------------------------------------------------------------------------------------------------
+
+
+
+
