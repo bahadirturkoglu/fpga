@@ -12,10 +12,10 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 
 
 entity k_means is
-generic(	
-            Data_num:integer:=5;    --datanın eleman sayısı
+generic(
+            Data_num:integer:=15;    --datanın eleman sayısı
             Data_bit_num:integer:=8 --elemanların bit sayısı
-            
+
 						);
 
 port  (
@@ -27,8 +27,8 @@ end k_means ;
 
 
 architecture Behavioral of k_means is
-                                     
-  
+
+
 ---------------------------------------------------------------------------------------------
 --                                      BÖLME İŞLEMİ
 
@@ -64,19 +64,29 @@ signal state_ctrl : state := UZAKLIK;
 
 type ROM is array (0 to 1) of std_logic_vector(Data_bit_num-1 downto 0);
 type ROM_Data is array(0 to Data_num-1) of ROM;
-signal data_set : ROM_Data :=(("00000011","00000011"), --DATASET
-                              ("00000100","00000100"),
-                              ("00001000","00001000"),
-                              ("00001000","00001100"),
-                              ("00000110","00000110"));
+signal data_set : ROM_Data :=(("00000101","00000100"), --DATASET
+                              ("00001000","00000111"),
+                              ("00000010","00000111"),
+                              ("00000001","00000011"),
+                              ("00000011","00001001"),
+                              ("00000001","00000011"),
+                              ("00000101","00001001"),
+                              ("00001001","00000110"),
+                              ("00000111","00000101"),
+                              ("00000110","00001001"),
+                              ("00000010","00000011"),
+                              ("00000101","00000100"),
+                              ("00000111","00001001"),
+                              ("00001001","00000100"),
+                              ("00000110","00000010"));
 
-signal center_1 :  ROM :=("00000011","00000011"); -- MERKEZ_1
-signal center_2 :  ROM :=("00000111","00000111"); -- MERKEZ_2
+signal center_1 :  ROM :=("00000101","00001000"); -- MERKEZ_1
+signal center_2 :  ROM :=("00000010","00001000"); -- MERKEZ_2
 
 signal new_center_1,new_center_2 :ROM := (others =>(others =>'0'));--YENİ_MERKEZLER
 
 
-type cluster is array (0 to Data_num-1) of integer ; 
+type cluster is array (0 to Data_num-1) of integer ;
 signal cluster_1,cluster_2 : cluster:=(others =>0);
 
 ----------------------------------------------------------
@@ -104,37 +114,37 @@ out_clk_4  := r_sayac(1);
 out_clk_8  := r_sayac(2);
 out_clk_16 := r_sayac(3);
 
-        if RST='1' then 
-         
-             data_indis:=0;           
+        if RST='1' then
+
+             data_indis:=0;
              center_1_point:=0;
              center_2_point:=0;
-             
-             result<='0';  
-             newcenter_ctrl:='0';     
+
+             result<='0';
+             newcenter_ctrl:='0';
              new_loop_ctrl:='0';
-                                 
-             cluster_1 <=(others =>0);  
-             cluster_2 <=(others =>0); 
-             
+
+             cluster_1 <=(others =>0);
+             cluster_2 <=(others =>0);
+
              x:=0;
              w:=0;
              center_1_x:=(others =>'0');
              center_1_y:=(others =>'0');
              center_2_x:=(others =>'0');
              center_2_y:=(others =>'0');
-                
+
         elsif (clk'event and clk='1') then
-        
+
         case state_ctrl  is
              when UZAKLIK =>
 
-             r_sayac:=r_sayac+1;      
-                       
+             r_sayac:=r_sayac+1;
+
             if(data_indis=Data_num)then         --datanın tüm elemanları için işlem yapıldıysa "YENI_MERKEZ"
                 state_ctrl <=YENI_MERKEZ;       --durumuna geç
                 new_loop_ctrl:='1';
-             
+
             end if;
 
          -- pipeline olarak yapılan uzaklık işlemi
@@ -157,7 +167,7 @@ out_clk_16 := r_sayac(3);
                 distance_center_1:=mult_x1+mult_y1;
                 distance_center_2:=mult_x2+mult_y2;
                 ctrl_kume<=1;
-                
+
             end if;
 
             if(ctrl_kume=1)then
@@ -165,20 +175,20 @@ out_clk_16 := r_sayac(3);
                   cluster_2(center_2_point)<=data_indis;
                   data_indis:=data_indis+1;                  -- datanın indisi
                   center_2_point:=center_2_point+1;          -- kume_2'nin indisi
-                  
-                  
+
+
                  else
                   cluster_1(center_1_point)<=data_indis;
                   center_1_point:=center_1_point+1;          -- kume_1'in indisi
                   data_indis:=data_indis+1;                  -- datanın indisi
-                  
+
 
                 end if;
                 ctrl_kume<=0;
               end if;
-                            
+
          when YENI_MERKEZ =>
-         
+
          if(new_loop_ctrl='1')then
             t1:=conv_std_logic_vector(center_1_point,8);
             t2:=conv_std_logic_vector(center_2_point,8);
@@ -187,57 +197,57 @@ out_clk_16 := r_sayac(3);
             center_2_x:=(others =>'0');
             center_2_y:=(others =>'0');
             x:=0;
-            w:=0;                                
-            newcenter_ctrl:='1';  
+            w:=0;
+            newcenter_ctrl:='1';
             new_loop_ctrl:='0';
-            end if;        
+            end if;
                  if (  newcenter_ctrl='1')then
                      if(x<center_1_point)then
                          center_1_x:=center_1_x+data_set(cluster_1(x))(0); --merkez_1 için kume_1'deki x degerlerinin toplanması
-                         center_1_y:=center_1_y+data_set(cluster_1(x))(1); --merkez_1 için kume_1'deki y degerlerinin toplanması                     
-                         x:=x+1;                                                                    
-                     end if; 
+                         center_1_y:=center_1_y+data_set(cluster_1(x))(1); --merkez_1 için kume_1'deki y degerlerinin toplanması
+                         x:=x+1;
+                     end if;
                      if(x=center_1_point)then
                         new_center_1(0)<= divide ( center_1_x ,t1 );       --yeni merkez_1'İN X DEGERİ
                         new_center_1(1) <= divide ( center_1_y ,t1 );      --yeni merkez_1'İN Y DEGERİ
-                        m_ctrl_1:='1';                                         
+                        m_ctrl_1:='1';
                      end if;
                      if(w<center_2_point)then
                         center_2_x:=center_2_x+data_set(cluster_2(w))(0);  --merkez_2 için kume_1'deki x degerlerinin toplanması
-                        center_2_y:=center_2_y+data_set(cluster_2(w))(1);  --merkez_2 için kume_1'deki y degerlerinin toplanması                     
+                        center_2_y:=center_2_y+data_set(cluster_2(w))(1);  --merkez_2 için kume_1'deki y degerlerinin toplanması
                         w:=w+1;
                      end if;
                      if(w=center_2_point)then
                         new_center_2(0)<= divide ( center_2_x ,t2 );     --yeni merkez_2'İN X DEGERİ
-                        new_center_2(1) <= divide (center_2_y ,t2 );     --yeni merkez_2'İN Y DEGERİ                 
-                        m_ctrl_2:='1'; 
+                        new_center_2(1) <= divide (center_2_y ,t2 );     --yeni merkez_2'İN Y DEGERİ
+                        m_ctrl_2:='1';
                      end if;
-                     if(m_ctrl_1='1' and m_ctrl_2='1')then               
-                       state_ctrl  <=KONTROL; 
+                     if(m_ctrl_1='1' and m_ctrl_2='1')then
+                       state_ctrl  <=KONTROL;
                        m_ctrl_1:='0';
-                       m_ctrl_2:='0';  
-                     end if;             
-                 end if;                              
-                  
-           when KONTROL=>  
-           
-           if(center_1=new_center_1 and center_2=new_center_2 )then  --eski ve yeni merkezlerıin karşılaştırılması 
-           
+                       m_ctrl_2:='0';
+                     end if;
+                 end if;
+
+           when KONTROL=>
+
+           if(center_1=new_center_1 and center_2=new_center_2 )then  --eski ve yeni merkezlerıin karşılaştırılması
+
            result<='1';
-           
+
            else
            center_1<=new_center_1;
            center_2<=new_center_2;
            state_ctrl  <=UZAKLIK;        --yeni merkez eski merkeze eşit değilse "UZAKLIK" durumuna dön
-           data_indis:=0;           
+           data_indis:=0;
            center_1_point:=0;
            center_2_point:=0;
-            
-           newcenter_ctrl:='0';                          
-           cluster_1 <=(others =>0);  
-           cluster_2 <=(others =>0);                  
-           end if; 
-                                                         
+
+           newcenter_ctrl:='0';
+           cluster_1 <=(others =>0);
+           cluster_2 <=(others =>0);
+           end if;
+
          when others => NULL;
    end case;
 
@@ -245,6 +255,7 @@ end if;
 end process;
 
 end Behavioral;
+
 
 
 ------------------------------------------------------------------------------------------------------------------
