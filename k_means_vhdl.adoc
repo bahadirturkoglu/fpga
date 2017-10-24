@@ -1,5 +1,6 @@
 =                            K_MEANS VHDL KODU +
 
+image::https://github.com/bahadirturkoglu/fpga/raw/master/demux_beh-4.PNG[R]
 
 
 [source,vhdl]
@@ -28,8 +29,6 @@ end k_means ;
 
 architecture Behavioral of k_means is
 
-
----------------------------------------------------------------------------------------------
 --                                      BÖLME İŞLEMİ
 
 function  divide  (a : std_logic_vector; b : std_logic_vector) return std_logic_vector is
@@ -56,9 +55,8 @@ return a1;
 end divide;
 
 
-----------------------------------------------------------------------------------------------
 signal ctrl_kume: integer:=0;
---------------------------------------------------------
+
 type state is (UZAKLIK,YENI_MERKEZ,KONTROL);
 signal state_ctrl : state := UZAKLIK;
 
@@ -89,7 +87,6 @@ signal new_center_1,new_center_2 :ROM := (others =>(others =>'0'));--YENİ_MERKE
 type cluster is array (0 to Data_num-1) of integer ;
 signal cluster_1,cluster_2 : cluster:=(others =>0);
 
-----------------------------------------------------------
 
 begin
 
@@ -259,8 +256,8 @@ end Behavioral;
 
 
 ------------------------------------------------------------------------------------------------------------------
+
+
 image::https://github.com/bahadirturkoglu/fpga/raw/master/demux_beh-4.PNG[R]
-
-
 
 
