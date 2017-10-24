@@ -259,10 +259,7 @@ end Behavioral;
 
 
 ------------------------------------------------------------------------------------------------------------------
-
-SİMULASYON +
-
-image::https://github.com/bahadirturkoglu/fpga/raw/master/k_means.PNG[R]
+image::https://github.com/bahadirturkoglu/fpga/raw/master/demux_beh-4.PNG[R]
 
 
 
