@@ -1,6 +1,6 @@
 =                            K_MEANS KÜMELEME ALGORİTMASI +
 
-==VHDL KODU
+==  VHDL KODU +
 
 [source,vhdl]
 ------------------------------------------------------------------------------------------------------
@@ -254,7 +254,7 @@ end Behavioral;
 
 ------------------------------------------------------------------------------------------------------
 
-== SİMULASYON
+== SİMULASYON +
 
 image::https://github.com/bahadirturkoglu/fpga/raw/master/k_means.PNG[R]
 
