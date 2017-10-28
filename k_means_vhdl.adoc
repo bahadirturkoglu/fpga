@@ -68,7 +68,7 @@ end divide;
 
 
 ----------------------------------------------------------------------------------------------
-signal ctrl_kume: integer:=0;
+signal ctrl_cluster: integer:=0;
 --------------------------------------------------------
 type state is (UZAKLIK,YENI_MERKEZ,KONTROL);
 signal state_ctrl : state := UZAKLIK;
@@ -147,8 +147,8 @@ out_clk_16 := clk_divider(3);
              center_2_y:=(others =>'0');
              c_ctrl_1:='0';
              c_ctrl_2:='0';
-             
-             
+
+
 
         elsif (clk'event and clk='1') then
 
@@ -182,25 +182,25 @@ out_clk_16 := clk_divider(3);
             if(out_clk_8='1')then
                 distance_center_1:=mult_x1+mult_y1;
                 distance_center_2:=mult_x2+mult_y2;
-                ctrl_kume<=1;
+                ctrl_cluster<=1;
 
             end if;
 
-            if(ctrl_kume=1)then
+            if(ctrl_cluster=1)then
                 if(distance_center_2<=distance_center_1)then --NOKTANIN 2 MERKEZE UZAKLIGININ KARŞILAŞTIRILMASI
                   cluster_2(center_2_counter)<=data_num_counter;
                   data_num_counter:=data_num_counter+1;                  -- datanın indisi
                   center_2_counter:=center_2_counter+1;          -- kume_2'nin indisi
-
+                  ctrl_cluster<=0;
 
                  else
                   cluster_1(center_1_counter)<=data_num_counter;
                   center_1_counter:=center_1_counter+1;          -- kume_1'in indisi
                   data_num_counter:=data_num_counter+1;                  -- datanın indisi
-
+                  ctrl_cluster<=0;
 
                 end if;
-                ctrl_kume<=0;
+                
               end if;
 
          when YENI_MERKEZ =>
