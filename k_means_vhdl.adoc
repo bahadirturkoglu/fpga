@@ -21,19 +21,9 @@ use work.port_array_out.all;
 
 
 
+
 entity k_means is
-generic(
-            Data_num:integer:=15;    --datanın eleman sayısı
-            Data_bit_num:integer:=8 --elemanların bit sayısı
 
-						);
-
-port  (
- Clk      : in std_logic;
- RST      : in std_logic;
- center_1_out :out center_array;
- center_2_out :out center_array
-);
 end k_means ;
 
 
@@ -68,7 +58,9 @@ end divide;
 
 
 ----------------------------------------------------------------------------------------------
-signal ctrl_cluster: integer:=0;
+constant CLK_PERIOD :time :=5 ns;
+constant Data_num:integer:=15;    --datanın eleman sayısı
+constant Data_bit_num:integer:=8 ;
 --------------------------------------------------------
 type state is (UZAKLIK,YENI_MERKEZ,KONTROL);
 signal state_ctrl : state := UZAKLIK;
@@ -99,10 +91,28 @@ signal new_center_1,new_center_2 :center_array:= (others =>(others =>'0'));--YEN
 
 type cluster is array (0 to Data_num-1) of integer ;
 signal cluster_1,cluster_2 : cluster:=(others =>0);
-
+signal CLK,RST:std_logic:='0';
+signal  center_1_out,center_2_out : center_array;
+signal ctrl_cluster: integer:=0;
 ----------------------------------------------------------
 
 begin
+    process
+begin
+    clk<='1';
+    wait for CLK_PERIOD/2;
+    clk<='0';
+    wait for CLK_PERIOD/2;
+
+end process;
+process
+    begin
+        rst<='1';
+        wait for 20ns;
+        rst<='0';
+        wait for 1000ns;
+
+    end process; 
 
 process(clk)
 
@@ -158,7 +168,7 @@ out_clk_16 := clk_divider(3);
             clk_divider:=clk_divider+1;
 
             if(data_num_counter=Data_num)then         --datanın tüm elemanları için işlem yapıldıysa "YENI_MERKEZ"
-                state_ctrl <=YENI_MERKEZ;       --durumuna geç
+                state_ctrl <=YENI_MERKEZ;             --durumuna geç
                 new_loop_ctrl:='1';
 
             end if;
@@ -188,19 +198,19 @@ out_clk_16 := clk_divider(3);
 
             if(ctrl_cluster=1)then
                 if(distance_center_2<=distance_center_1)then --NOKTANIN 2 MERKEZE UZAKLIGININ KARŞILAŞTIRILMASI
-                  cluster_2(center_2_counter)<=data_num_counter;
-                  data_num_counter:=data_num_counter+1;                  -- datanın indisi
+                  cluster_2(center_2_counter)<=data_num_counter;                  
                   center_2_counter:=center_2_counter+1;          -- kume_2'nin indisi
+                  data_num_counter:=data_num_counter+1;            -- datanın indisi 
                   ctrl_cluster<=0;
 
                  else
                   cluster_1(center_1_counter)<=data_num_counter;
                   center_1_counter:=center_1_counter+1;          -- kume_1'in indisi
-                  data_num_counter:=data_num_counter+1;                  -- datanın indisi
+                  data_num_counter:=data_num_counter+1;               -- datanın indisi
                   ctrl_cluster<=0;
 
                 end if;
-                
+
               end if;
 
          when YENI_MERKEZ =>
