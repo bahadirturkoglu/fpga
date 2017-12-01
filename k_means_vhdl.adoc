@@ -21,7 +21,6 @@ use work.port_array_out.all;
 
 
 
-
 entity k_means is
 
 end k_means ;
@@ -64,6 +63,8 @@ constant Data_bit_num:integer:=8 ;
 --------------------------------------------------------
 type state is (UZAKLIK,YENI_MERKEZ,KONTROL);
 signal state_ctrl : state := UZAKLIK;
+signal CLK,RST:std_logic:='0';
+signal  center_1_out,center_2_out : center_array; -- EN SON BULUNAN MERKEZLER
 
 type ROM is array (0 to 1) of std_logic_vector(Data_bit_num-1 downto 0);
 type ROM_Data is array(0 to Data_num-1) of ROM;
@@ -85,63 +86,59 @@ signal data_set : ROM_Data :=(("00000101","00000100"), --DATASET
 
 signal center_1 : center_array:=("00000101","00001000"); -- MERKEZ_1
 signal center_2 : center_array:=("00000010","00001000"); -- MERKEZ_2
+signal data_number,control_enb:integer:=0;
+
 
 signal new_center_1,new_center_2 :center_array:= (others =>(others =>'0'));--YENİ_MERKEZLER
 
-
+signal data_num_counter:integer:=0;
 type cluster is array (0 to Data_num-1) of integer ;
-signal cluster_1,cluster_2 : cluster:=(others =>0);
-signal CLK,RST:std_logic:='0';
-signal  center_1_out,center_2_out : center_array;
-signal ctrl_cluster: integer:=0;
+signal cluster_1,cluster_2 : cluster:=(others =>0); --2 MERKEZ İÇİN DATAYI TUTACAK OLAN KÜMELER
+
 ----------------------------------------------------------
+signal sub_x1,sub_y1,sub_x2,sub_y2:std_logic_vector(Data_bit_num-1 downto 0):=(others =>'0');
+signal mult_x1,mult_y1,mult_x2,mult_y2:std_logic_vector((Data_bit_num*2)-1 downto 0):=(others =>'0');
+signal distance_center_1,distance_center_2:std_logic_vector((Data_bit_num*2)-1 downto 0):=(others =>'0');
+signal center_1_counter,center_2_counter:integer:=0;
 
 begin
-    process
-begin
-    clk<='1';
-    wait for CLK_PERIOD/2;
-    clk<='0';
-    wait for CLK_PERIOD/2;
-
-end process;
-process
+   process
     begin
-        rst<='1';
-        wait for 20ns;
-        rst<='0';
-        wait for 1000ns;
-
-    end process; 
+    clk<='1';
+     wait for CLK_PERIOD/2;
+     clk<='0';
+     wait for CLK_PERIOD/2;
+  end process;
+   process
+    begin
+     rst<='1';
+     wait for 20ns;
+     rst<='0';
+     wait for 500ns;
+ end process;
 
 process(clk)
 
 
-variable sub_x1,sub_y1,sub_x2,sub_y2:std_logic_vector(Data_bit_num-1 downto 0):=(others =>'0');
-variable mult_x1,mult_y1,mult_x2,mult_y2:std_logic_vector((Data_bit_num*2)-1 downto 0):=(others =>'0');
-variable distance_center_1,distance_center_2:std_logic_vector((Data_bit_num*2)-1 downto 0):=(others =>'0');
+
 variable t1 ,t2: std_logic_vector(Data_bit_num-1 downto 0) :=(others => '0');
 variable center_1_x,center_1_y,center_2_x,center_2_y: std_logic_vector (Data_bit_num-1 downto 0):=(others =>'0');
-variable center_1_counter,center_2_counter,x,w,data_num_counter:integer:=0;
-variable  out_clk_2 ,out_clk_4,out_clk_8,out_clk_16: std_logic :='0';
-variable clk_divider:std_logic_vector(3 downto 0):=(others=> '0');
+variable x,w:integer:=0;
 variable c_ctrl_1,c_ctrl_2, newcenter_ctrl,new_loop_ctrl:std_logic:='0';
+variable enb:std_logic:='0';
 
 
 begin
 
-out_clk_2  := clk_divider(0);
-out_clk_4  := clk_divider(1);
-out_clk_8  := clk_divider(2);
-out_clk_16 := clk_divider(3);
-
-
 
         if RST='1' then
 
-             data_num_counter:=0;
-             center_1_counter:=0;
-             center_2_counter:=0;
+             data_num_counter<=0;
+             center_1_counter<=0;
+             center_2_counter<=0;
+             
+             control_enb<=0;
+             data_number<=0;
 
              newcenter_ctrl:='0';
              new_loop_ctrl:='0';
@@ -164,8 +161,21 @@ out_clk_16 := clk_divider(3);
 
         case state_ctrl  is
              when UZAKLIK =>
+             control_enb<=control_enb+1;
+             
+             if control_enb=3 then    -- 3 CLK GEÇTİKTEN SONRA UZAKLIK KARŞILAŞTIRMA İŞLEMİ AKTİFLEŞTİRİLİYOR.
+                enb:='1';             -- UZAKLIK İŞLEMİ PİPELİNE OLARAK YAPILDIĞI İÇİN İLK VERİLER 3 CLK SONRA OLUŞUYOR
+             end if;
+            
+             if control_enb=18 then   --TÜM ELEMANLAR KARŞILAŞTIRILIP, KUMELERİNE YERLEŞTİRİLDİKTEN SONRA ENB=0 YAPILIYOT
+                enb:='0';
+                end if;
+                
+             if data_number<14 then   
+                 data_number<=data_number+1;
+             end if;
 
-            clk_divider:=clk_divider+1;
+          
 
             if(data_num_counter=Data_num)then         --datanın tüm elemanları için işlem yapıldıysa "YENI_MERKEZ"
                 state_ctrl <=YENI_MERKEZ;             --durumuna geç
@@ -173,45 +183,35 @@ out_clk_16 := clk_divider(3);
 
             end if;
 
-         -- pipeline olarak yapılan uzaklık işlemi
-            if(out_clk_2='1')then
+         --          **PİPELİNE** olarak yapılan uzaklık işlemi
+                sub_x1<=abs(center_1(0)-data_set(data_number)(0));
+                sub_y1<=abs(center_1(1)-data_set(data_number)(1));
+                
+                sub_x2<=abs(center_2(0)-data_set(data_number)(0));
+                sub_y2<=abs(center_2(1)-data_set(data_number)(1));
 
-                sub_x1:=abs(center_1(0)-data_set(data_num_counter)(0));
-                sub_y1:=abs(center_1(1)-data_set(data_num_counter)(1));
-                sub_x2:=abs(center_2(0)-data_set(data_num_counter)(0));
-                sub_y2:=abs(center_2(1)-data_set(data_num_counter)(1));
-            end if;
+                mult_x1<=sub_x1*sub_x1;
+                mult_y1<=sub_y1*sub_y1;
+                
+                mult_x2<=sub_x2*sub_x2;
+                mult_y2<=sub_y2*sub_y2;
 
-            if(out_clk_4='1')then
-                mult_x1:=sub_x1*sub_x1;
-                mult_y1:=sub_y1*sub_y1;
-                mult_x2:=sub_x2*sub_x2;
-                mult_y2:=sub_y2*sub_y2;
-            end if;
+                distance_center_1<=mult_x1+mult_y1;
+                distance_center_2<=mult_x2+mult_y2;
+                
 
-            if(out_clk_8='1')then
-                distance_center_1:=mult_x1+mult_y1;
-                distance_center_2:=mult_x2+mult_y2;
-                ctrl_cluster<=1;
-
-            end if;
-
-            if(ctrl_cluster=1)then
-                if(distance_center_2<=distance_center_1)then --NOKTANIN 2 MERKEZE UZAKLIGININ KARŞILAŞTIRILMASI
-                  cluster_2(center_2_counter)<=data_num_counter;                  
-                  center_2_counter:=center_2_counter+1;          -- kume_2'nin indisi
-                  data_num_counter:=data_num_counter+1;            -- datanın indisi 
-                  ctrl_cluster<=0;
-
-                 else
-                  cluster_1(center_1_counter)<=data_num_counter;
-                  center_1_counter:=center_1_counter+1;          -- kume_1'in indisi
-                  data_num_counter:=data_num_counter+1;               -- datanın indisi
-                  ctrl_cluster<=0;
-
-                end if;
-
-              end if;
+         if enb='1' then
+                        if distance_center_1 <=  distance_center_2  then
+                             cluster_1(center_1_counter)<=data_num_counter;
+                             center_1_counter<=center_1_counter+1;          -- kume_1'nin adresini arttır
+                             data_num_counter<=data_num_counter+1;          
+                        else
+                        cluster_2(center_2_counter)<=data_num_counter;
+                        center_2_counter<=center_2_counter+1;          -- kume_2'nin adresini arttır
+                        data_num_counter<=data_num_counter+1;
+                       
+                   end if; 
+                   end if;
 
          when YENI_MERKEZ =>
 
@@ -236,8 +236,8 @@ out_clk_16 := clk_divider(3);
                          x:=x+1;
                      end if;
                      if(x=center_1_counter)then
-                        new_center_1(0)<= divide ( center_1_x ,t1 );       --yeni merkez_1'İN X DEGERİ
-                        new_center_1(1) <= divide ( center_1_y ,t1 );      --yeni merkez_1'İN Y DEGERİ
+                        new_center_1(0)<= divide ( center_1_x ,t1 );       --yeni merkez_1'İN X DEGERİNİN BULUNMASI
+                        new_center_1(1) <= divide ( center_1_y ,t1 );      --yeni merkez_1'İN Y DEGERİNİN BULUNMASI
                         c_ctrl_1:='1';
                      end if;
                      if(w<center_2_counter)then
@@ -246,8 +246,8 @@ out_clk_16 := clk_divider(3);
                         w:=w+1;
                      end if;
                      if(w=center_2_counter)then
-                        new_center_2(0)<= divide ( center_2_x ,t2 );     --yeni merkez_2'İN X DEGERİ
-                        new_center_2(1) <= divide (center_2_y ,t2 );     --yeni merkez_2'İN Y DEGERİ
+                        new_center_2(0)<= divide ( center_2_x ,t2 );     --yeni merkez_2'İN X DEGERİNİN BULUNMASI
+                        new_center_2(1) <= divide (center_2_y ,t2 );     --yeni merkez_2'İN Y DEGERİNİN BULUNMASI
                         c_ctrl_2:='1';
                      end if;
                      if(c_ctrl_1='1' and c_ctrl_2='1')then
@@ -259,22 +259,24 @@ out_clk_16 := clk_divider(3);
 
            when KONTROL=>
 
-           if(center_1=new_center_1 and center_2=new_center_2 )then  --eski ve yeni merkezlerıin karşılaştırılması
+           if(center_1=new_center_1 and center_2=new_center_2 )then  --eski ve yeni merkezlerin karşılaştırılması ve eşitse algoritmanın sonlanması
 
 
-           center_1_out<=center_1;
+           center_1_out<=center_1; 
            center_2_out<=center_2;
 
            else
            center_1<=new_center_1;
            center_2<=new_center_2;
            state_ctrl  <=UZAKLIK;        --yeni merkez eski merkeze eşit değilse "UZAKLIK" durumuna dön
-           data_num_counter:=0;
-           center_1_counter:=0;
-           center_2_counter:=0;
+           data_num_counter<=0;
+           center_1_counter<=0;
+           center_2_counter<=0;
            newcenter_ctrl:='0';
            cluster_1 <=(others =>0);
            cluster_2 <=(others =>0);
+           control_enb<=0;
+           data_number<=0;
            end if;
 
          when others => NULL;
