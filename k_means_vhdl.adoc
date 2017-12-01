@@ -290,6 +290,6 @@ end Behavioral;
 
 == SİMULASYON +
 
-image::https://github.com/bahadirturkoglu/fpga/raw/master/shem1.PNG[R]
+image::https://github.com/bahadirturkoglu/fpga/raw/master/new_1.PNG[R]
 
 
